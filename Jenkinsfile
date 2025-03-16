@@ -19,7 +19,12 @@ pipeline {
         }
         stage('Deliver') { 
             steps {
+                sh "python3 -m venv myenv"
+                sh "source myenv/bin/activate"
+                sh "pip install pyinstaller"
+                sh "echo pyinstall --version"
                 sh "pyinstaller --onefile sources/add2vals.py" 
+                sh "deactivate"
             }
             post {
                 success {
